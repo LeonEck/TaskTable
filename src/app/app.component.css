@@ -1,0 +1,20 @@
+.appTitle {
+  color: #004a8e;
+}
+
+.appTitle:after {
+  position: absolute;
+  content: '';
+  top: 82%;
+  height: 5px;
+  width: 74px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #d10017;
+  border-radius: 25px;
+}
+
+.mainViewContainer {
+  min-height: 60vh;
+}

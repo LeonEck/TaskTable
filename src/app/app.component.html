@@ -1,0 +1,37 @@
+<div class="container my-3 mainViewContainer">
+  <div class="alert alert-danger" *ngIf="taskService.databaseError">
+    You browser does not support local database storage. This is needed for TaskTable to work. Please use a recent version of your browser. Also some browsers do not allow database storage in private browsing.
+  </div>
+  <div class="mainViewContainer my-3" *ngIf="!taskService.databaseError">
+    <app-new-task></app-new-task>
+    <app-task-table [tasks]="taskService.tasks"></app-task-table>
+    <div class="mt-5" *ngIf="taskService.completedTasks && taskService.completedTasks.length !== 0">
+      <p class="lead ml-1 ml-sm-0">
+        Completed tasks
+      </p>
+      <app-task-table [tasks]="taskService.completedTasks"></app-task-table>
+      <a href="#" class="text-danger mr-1 mr-sm-0 d-flex justify-content-end"
+         (click)="taskService.deleteCompletedTasks(); $event.preventDefault()">Delete all completed tasks</a>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <app-data-handler></app-data-handler>
+    </div>
+  </div>
+  <div class="row text-center my-2">
+    <div class="col">
+      <h1 class="display-4 appTitle">TaskTable</h1>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      TaskTable stores all data in your browser. This means the data <em>should</em> be persistent between reloads. There are still scenarios where the data might be deleted. For example if you clear all data for this site or if you are accessing this site through a private browsing window. If you are worried that your data might not be stored between sessions, please use the import / export functionality.
+    </div>
+  </div>
+  <div class="row text-center my-3">
+    <div class="col lead">
+      Created by <a href="https://leoneck.de" target="_blank" rel="noreferrer noopener" style="color: #004a8e">Leon Eck</a>
+    </div>
+  </div>
+</div>
