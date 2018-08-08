@@ -1,6 +1,6 @@
-import {Injectable, ɵChangeDetectorStatus} from '@angular/core';
-import { TaskDatabase } from "./taskdatabase";
-import { Task } from "./task";
+import { Injectable } from '@angular/core';
+import { TaskDatabase } from './taskdatabase';
+import { Task } from './task';
 
 import { saveAs } from 'file-saver/FileSaver';
 
@@ -26,7 +26,9 @@ export class TaskService {
   }
 
   addTask() {
-    if (this.newTaskTitle === '') return;
+    if (this.newTaskTitle === '') {
+      return;
+    }
     this.addingInProgress = true;
     this.taskDB.taskTable.add({
       title: this.newTaskTitle,
@@ -101,7 +103,7 @@ export class TaskService {
   importTasks(event) {
     const reader = new FileReader();
 
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsText(file);
 
@@ -113,14 +115,14 @@ export class TaskService {
           return;
         }
         if (!confirm('By clicking OK all current data will be overridden by the imported data.')) {
-          return
+          return;
         }
         csvLines.shift(); // Remove header
         const newTasks = [];
         csvLines.forEach(line => {
           const values = line.split(',');
           newTasks.push({
-            completed: parseInt(values[0]),
+            completed: parseInt(values[0], 10),
             title: values[1]
           });
         });
@@ -142,9 +144,9 @@ export class TaskService {
       });
 
       const csvContent = csvLines.join('\n');
-      const csvFile = new Blob([csvContent], {type: "text/csv;charset=utf-8"});
+      const csvFile = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
       const currentDate = new Date();
-      const dateString = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth()+1)).slice(-2) +
+      const dateString = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth() + 1)).slice(-2) +
         '-' + ('0' + currentDate.getDate()).slice(-2);
       saveAs(csvFile, `${dateString}_TaskTable.csv`);
     });
