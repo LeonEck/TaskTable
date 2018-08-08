@@ -1,8 +1,0 @@
-<div class="row d-flex justify-content-center">
-  <div class="btn-group">
-    <button type="button" class="btn btn-outline-secondary" (click)="importInput.click()">Import</button>
-    <button type="button" class="btn btn-outline-secondary" (click)="taskService.exportTasks()">Export</button>
-  </div>
-  <input #importInput type="file" accept="text/csv, *.csv" class="d-none"
-         (click)="importInput.value = ''" (change)="taskService.importTasks($event)">
-</div>
