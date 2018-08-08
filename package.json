@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildgithub": "ng build --prod --base-href https://leoneck.github.io/TaskTable/",
     "lint": "ng lint"
   },
   "private": true,
